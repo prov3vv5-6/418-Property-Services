@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bid Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>418 Property Services Bid Calculator</h1>
+      <div class="field">
+        <label for="equipment">Equipment</label>
+        <select id="equipment">
+          <option value="2.5">Pickup Truck</option>
+          <option value="5">Small Trailer</option>
+          <option value="10">Large Trailer</option>
+          <option value="15">Box Truck</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fullness">How Full?</label>
+        <select id="fullness">
+          <option value="0.25">Quarter Full</option>
+          <option value="0.5">Half Full</option>
+          <option value="0.75">Three-Quarters Full</option>
+          <option value="1">Completely Full</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="dumpWeight">Heavy Debris (tons)</label>
+        <input id="dumpWeight" type="number" min="0" value="0" />
+      </div>
+      <div class="field">
+        <label for="laborWorkers">Workers</label>
+        <input id="laborWorkers" type="number" min="0" value="0" />
+      </div>
+      <div class="field">
+        <label for="laborHours">Labor Hours</label>
+        <input id="laborHours" type="number" min="0" value="0" step="0.5" />
+      </div>
+      <div class="field">
+        <label for="travelMiles">Travel Distance (miles)</label>
+        <input id="travelMiles" type="number" min="0" value="0" />
+      </div>
+      <button id="calcBtn" type="button">Calculate Bid</button>
+      <p class="result-line">Suggested Bid: <span id="result">$0</span></p>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
