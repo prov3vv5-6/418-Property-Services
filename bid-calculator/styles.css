@@ -1,6 +1,48 @@
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #222;
   margin: 0;
+  font-size: 16px;
+}
+main {
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.field {
+  margin-bottom: 1rem;
+}
+/* descendant selector. reads as any label inside a .field */
+.field label {
+  display: block;
+}
+/* The comma groups selectors — "any input inside .field, or any select inside .field." Each selector is separated by a comma; the properties apply to all of them. */
+.field input,
+.field select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+#calcBtn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.result-line {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+#result {
+  font-weight: bold;
+  color: #2e7d32;
 }
