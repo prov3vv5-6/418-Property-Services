@@ -6,6 +6,7 @@ const laborWorkersEl = document.getElementById("laborWorkers");
 const laborHoursEl = document.getElementById("laborHours");
 const travelMilesEl = document.getElementById("travelMiles");
 const resultEl = document.getElementById("result");
+const workersInputErrorMsgEl = document.getElementById("workersInputErrorMsg");
 
 // RATES
 const PRICE_PER_YARD = 40; // $ per cubic yard
@@ -19,6 +20,7 @@ calcBtn.addEventListener("click", calculateBid);
 
 // Calculate Bid Function
 function calculateBid() {
+  workersInputErrorMsgEl.textContent = "";
   // Convert from string to decimal
   const capacity = parseFloat(equipmentEl.value);
   const fullness = parseFloat(fullnessEl.value);
@@ -27,6 +29,13 @@ function calculateBid() {
   const laborWorkers = parseFloat(laborWorkersEl.value) || 0;
   const laborHours = parseFloat(laborHoursEl.value) || 0;
   const travelMiles = parseFloat(travelMilesEl.value) || 0;
+
+  // Input Validation
+  if (!Number.isInteger(laborWorkers)) {
+    workersInputErrorMsgEl.textContent =
+      "Please enter a whole number of workers";
+    return;
+  }
 
   // Calculate base price
   const volume = capacity * fullness;
