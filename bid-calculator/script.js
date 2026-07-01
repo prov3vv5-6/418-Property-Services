@@ -22,10 +22,11 @@ function calculateBid() {
   // Convert from string to decimal
   const capacity = parseFloat(equipmentEl.value);
   const fullness = parseFloat(fullnessEl.value);
-  const dumpWeight = parseFloat(dumpWeightEl.value);
-  const laborWorkers = parseFloat(laborWorkersEl.value);
-  const laborHours = parseFloat(laborHoursEl.value);
-  const travelMiles = parseFloat(travelMilesEl.value);
+  // || 0 reads as: "use the parsed number, but if that failed, fall back to 0."
+  const dumpWeight = parseFloat(dumpWeightEl.value) || 0;
+  const laborWorkers = parseFloat(laborWorkersEl.value) || 0;
+  const laborHours = parseFloat(laborHoursEl.value) || 0;
+  const travelMiles = parseFloat(travelMilesEl.value) || 0;
 
   // Calculate base price
   const volume = capacity * fullness;
@@ -51,5 +52,6 @@ function calculateBid() {
   const total = Math.max(subtotal, MIN_CHARGE);
 
   // Display the total
+  console.log(`Suggested Bid: $${total.toFixed(2)}`);
   resultEl.textContent = `$${total.toFixed(2)}`;
 }

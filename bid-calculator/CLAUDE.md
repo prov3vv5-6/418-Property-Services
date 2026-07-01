@@ -86,9 +86,9 @@ large trailer 10 yd^3, box truck 15 yd^3.
 3. [x] Input form: equipment + fullness selects, dumpWeight/laborWorkers/laborHours/
        travelMiles number inputs, calcBtn button, all with matched label for/id — done
 4. [x] Result display area (`<span id="result">$0</span>`) — done
-5. [ ] CSS: mobile-first layout, variables, spacing, make it thumb-friendly  ← CURRENT
-6. [ ] JS: read inputs, compute price, show result live; handle empty/invalid input
-7. [ ] Stretch (optional): localStorage for default rates; itemized breakdown;
+5. [x] CSS: mobile-first layout, variables, spacing, make it thumb-friendly — done
+6. [x] JS: read inputs, compute price, show result; handle empty/invalid input — done
+7. [ ] Stretch (optional): localStorage for default rates; itemized breakdown;  ← NEXT
        **multi-load support** ("+ Add another load" button that sums volumes across
        multiple equipment+fullness rows, incl. mixed equipment — teaches dynamic DOM
        creation. v1 ships single-load only.) A cheap interim option is a single
@@ -97,10 +97,33 @@ large trailer 10 yd^3, box truck 15 yd^3.
 
 ## Current progress checkpoint
 
-- HTML skeleton: **done** (index.html has doctype, viewport, title "Bid Calculator", empty body).
+- **HTML: done** — heading + full form (equipment/fullness selects, 4 number inputs, all
+  with matched labels), Calculate button, `<span id="result">` display.
+- **CSS: done** — mobile-first stylesheet: `*` border-box reset, body defaults, centered
+  `main` (max-width 500px), stacked/spaced `.field`s, full-width thumb-friendly inputs,
+  green `#calcBtn` CTA, prominent `#result`.
+- **JS: done** — `calculateBid()` (extracted function, wired via
+  `addEventListener("click", calculateBid)`): reads 6 inputs with `parseFloat`, number
+  inputs guarded with `|| 0`; computes volume → base → dump/labor/travel (travel clamped
+  with `Math.max(0, …)`); enforces `MIN_CHARGE` via `Math.max`; formats with
+  `.toFixed(2)`; writes to page with `textContent`. Rate constants are placeholders — get
+  real numbers from the friend.
 - Pricing model: **decided** (volume/cubic-yards hybrid with placeholders — see above).
-- **Next step:** build the page heading + the input form inside `<body>`, one input at a
-  time (equipment select, how-full select, then the add-on number inputs), all with labels.
+- Deployed: live via GitHub Pages at `/418-Property-Services/bid-calculator/`.
+- **Next step (step 7, optional stretch):** pick one — recompute live on input `change`
+  (reuse `calculateBid`), itemized breakdown, `localStorage` for editable rates, or
+  multi-load support. Otherwise the v1 calculator is complete.
+
+## Teaching note (how this was built)
+
+Built in the "explain, then the user types it" mode (see TEACHING CONTRACT). The user
+typed every line; Claude explained each concept first and checked the result. Concepts
+covered and understood: box model + `box-sizing:border-box` on `*` (non-inherited vs
+inherited properties like `font-size`), mobile-first layout, `margin:0 auto` centering,
+id vs class vs descendant/grouped selectors, `getElementById`, `addEventListener` with a
+function reference (no parens), `.value` always returns a string, `parseFloat`,
+`Math.max` clamping, `.toFixed(2)` (rounds + returns string), `textContent` vs
+`innerHTML`, template literals, and the `|| 0` NaN fallback.
 
 ## Related
 
