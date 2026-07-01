@@ -89,10 +89,22 @@ large trailer 10 yd^3, box truck 15 yd^3.
 5. [x] CSS: mobile-first layout, variables, spacing, make it thumb-friendly — done
 6. [x] JS: read inputs, compute price, show result; handle empty/invalid input — done
 7. [ ] Stretch (optional): localStorage for default rates; itemized breakdown;  ← NEXT
-       **multi-load support** ("+ Add another load" button that sums volumes across
-       multiple equipment+fullness rows, incl. mixed equipment — teaches dynamic DOM
-       creation. v1 ships single-load only.) A cheap interim option is a single
-       "number of loads" multiplier field if the friend often repeats trips.
+       **multi-load support:** interim "number of loads" multiplier field — **done**
+       (Approach A: multiplies base volume; travel/dump stay manual by decision). Still
+       TODO — **Approach C, dynamic rows** ("+ Add another load" button that sums volumes
+       across multiple equipment+fullness rows, incl. mixed equipment — teaches dynamic
+       DOM creation).
+       - [ ] **Send bid to a lead (SMS hand-off)** — "Text this bid" button that opens
+         the friend's Messages app with the bid pre-filled, via an `sms:` link. DECIDED:
+         SMS link, **message-only** (no recipient/phone field — friend picks who to text).
+         No backend: a static site can't send SMS itself (that needs Twilio/paid + a
+         backend, out of scope); we hand the pre-written message off to the phone's own
+         Messages app. Alternatives considered & deferred: `navigator.share` share-sheet
+         (needs desktop fallback) and `mailto:` email. Build: add `<button id="textBtn"
+         type="button">`, build the body string from the calculated bid, `encodeURIComponent`
+         it, then `window.location.href = "sms:?&body=" + encoded` (note: `sms:` body
+         syntax varies iOS vs Android — verify on a real phone). New concept to teach:
+         `encodeURIComponent`.
 8. [ ] Deploy (GitHub Pages) + document
 
 ## Current progress checkpoint
