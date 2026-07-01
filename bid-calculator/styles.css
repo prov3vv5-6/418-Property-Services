@@ -19,6 +19,7 @@ main {
 /* descendant selector. reads as any label inside a .field */
 .field label {
   display: block;
+  margin-bottom: 2px;
 }
 /* The comma groups selectors — "any input inside .field, or any select inside .field." Each selector is separated by a comma; the properties apply to all of them. */
 .field input,

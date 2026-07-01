@@ -7,11 +7,12 @@ const laborHoursEl = document.getElementById("laborHours");
 const travelMilesEl = document.getElementById("travelMiles");
 const resultEl = document.getElementById("result");
 const workersInputErrorMsgEl = document.getElementById("workersInputErrorMsg");
+const numberOfLoadsEl = document.getElementById("numberOfLoads");
 
 // RATES
 const PRICE_PER_YARD = 30; // $ per cubic yard
 const DUMP_RATE = 48.5; // $ per ton of heavy debris. Twin Falls Transfer Station
-const LABOR_RATE = 35; // $ per worker per hour
+const LABOR_RATE = 40; // $ per worker per hour
 const FREE_MILES = 20; // free travel radius
 const PER_MILE = 1.5; // $ per mile beyond the free radius
 const MIN_CHARGE = 80; // minimum bid
@@ -29,6 +30,7 @@ function calculateBid() {
   const laborWorkers = parseFloat(laborWorkersEl.value) || 0;
   const laborHours = parseFloat(laborHoursEl.value) || 0;
   const travelMiles = parseFloat(travelMilesEl.value) || 0;
+  const numberOfLoads = parseFloat(numberOfLoadsEl.value) || 1;
 
   // Input Validation
   if (!Number.isInteger(laborWorkers)) {
@@ -38,9 +40,11 @@ function calculateBid() {
   }
 
   // Calculate base price
-  const volume = capacity * fullness;
+  const volume = capacity * fullness * numberOfLoads;
   const basePrice = volume * PRICE_PER_YARD;
-
+  console.log(
+    `capacity: ${capacity}, fullness: ${fullness}, number of loads: ${numberOfLoads}`,
+  );
   console.log(`Volume: ${volume} BasePrice: $${basePrice}`);
 
   // Calculate dump fee
