@@ -10,11 +10,11 @@ const workersInputErrorMsgEl = document.getElementById("workersInputErrorMsg");
 
 // RATES
 const PRICE_PER_YARD = 40; // $ per cubic yard
-const DUMP_RATE = 60; // $ per ton of heavy debris
+const DUMP_RATE = 48.5; // $ per ton of heavy debris. Twin Falls Transfer Station
 const LABOR_RATE = 35; // $ per worker per hour
 const FREE_MILES = 15; // free travel radius
 const PER_MILE = 2; // $ per mile beyond the free radius
-const MIN_CHARGE = 95; // minimum bid
+const MIN_CHARGE = 80; // minimum bid
 
 calcBtn.addEventListener("click", calculateBid);
 
