@@ -88,12 +88,21 @@ large trailer 10 yd^3, box truck 15 yd^3.
 4. [x] Result display area (`<span id="result">$0</span>`) — done
 5. [x] CSS: mobile-first layout, variables, spacing, make it thumb-friendly — done
 6. [x] JS: read inputs, compute price, show result; handle empty/invalid input — done
-7. [ ] Stretch (optional): localStorage for default rates; itemized breakdown;  ← NEXT
+7. [ ] Stretch (optional): localStorage for default rates; itemized breakdown;
        **multi-load support:** interim "number of loads" multiplier field — **done**
-       (Approach A: multiplies base volume; travel/dump stay manual by decision). Still
-       TODO — **Approach C, dynamic rows** ("+ Add another load" button that sums volumes
-       across multiple equipment+fullness rows, incl. mixed equipment — teaches dynamic
-       DOM creation).
+       (Approach A: multiplies base volume; travel/dump stay manual by decision).
+       - [ ] **Mixed loads via load rows — Style 1 (fixed rows)** ← NEXT (building now).
+         Lets each load have its OWN equipment + fullness + count, so a real "truck full +
+         trailer half" job prices honestly (single fullness currently forces both to match).
+         Approach: put a few (~3) fixed `.load` rows in the HTML, each = equipment select +
+         fullness select + count input. JS grabs them all with `querySelectorAll(".load")`,
+         loops, and sums each row's `capacity × fullness × count` into one `totalVolume`;
+         `basePrice = totalVolume × PRICE_PER_YARD`. Empty/unused rows contribute 0.
+         New concepts to teach: `querySelectorAll` (returns a *list*), and a loop that
+         accumulates a running total. Downstream (dump/labor/travel/min) unchanged.
+         **Supersedes** the combined "Truck + Trailer" option and the "number of loads"
+         multiplier — tidy those up once rows work. Style 2 (dynamic "+ Add another load"
+         button via `cloneNode`/`appendChild`) is the follow-up upgrade = old "Approach C."
        - [ ] **Send bid to a lead (SMS hand-off)** — "Text this bid" button that opens
          the friend's Messages app with the bid pre-filled, via an `sms:` link. DECIDED:
          SMS link, **message-only** (no recipient/phone field — friend picks who to text).
