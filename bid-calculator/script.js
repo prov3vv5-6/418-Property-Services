@@ -1,13 +1,12 @@
 const calcBtn = document.getElementById("calcBtn");
-const equipmentEl = document.getElementById("equipment");
-const fullnessEl = document.getElementById("fullness");
 const dumpWeightEl = document.getElementById("dumpWeight");
 const laborWorkersEl = document.getElementById("laborWorkers");
 const laborHoursEl = document.getElementById("laborHours");
 const travelMilesEl = document.getElementById("travelMiles");
 const resultEl = document.getElementById("result");
 const workersInputErrorMsgEl = document.getElementById("workersInputErrorMsg");
-const numberOfLoadsEl = document.getElementById("numberOfLoads");
+// Returns a list of all elements matching that CSS selector
+const loadRows = document.querySelectorAll(".load");
 
 // RATES
 const PRICE_PER_YARD = 30; // $ per cubic yard
@@ -23,14 +22,20 @@ calcBtn.addEventListener("click", calculateBid);
 function calculateBid() {
   workersInputErrorMsgEl.textContent = "";
   // Convert from string to decimal
-  const capacity = parseFloat(equipmentEl.value);
-  const fullness = parseFloat(fullnessEl.value);
   // || 0 reads as: "use the parsed number, but if that failed, fall back to 0."
   const dumpWeight = parseFloat(dumpWeightEl.value) || 0;
   const laborWorkers = parseFloat(laborWorkersEl.value) || 0;
   const laborHours = parseFloat(laborHoursEl.value) || 0;
   const travelMiles = parseFloat(travelMilesEl.value) || 0;
-  const numberOfLoads = parseFloat(numberOfLoadsEl.value) || 1;
+
+  let totalVolume = 0;
+  loadRows.forEach((row) => {
+    const capacity = parseFloat(row.querySelector(".loadEquipment").value);
+    const fullness = parseFloat(row.querySelector(".loadFullness").value);
+    const count = parseFloat(row.querySelector(".loadCount").value) || 0;
+    totalVolume += capacity * fullness * count;
+  });
+  const basePrice = totalVolume * PRICE_PER_YARD;
 
   // Input Validation
   if (!Number.isInteger(laborWorkers)) {
@@ -38,14 +43,6 @@ function calculateBid() {
       "Please enter a whole number of workers";
     return;
   }
-
-  // Calculate base price
-  const volume = capacity * fullness * numberOfLoads;
-  const basePrice = volume * PRICE_PER_YARD;
-  console.log(
-    `capacity: ${capacity}, fullness: ${fullness}, number of loads: ${numberOfLoads}`,
-  );
-  console.log(`Volume: ${volume} BasePrice: $${basePrice}`);
 
   // Calculate dump fee
   const dumpFee = dumpWeight * DUMP_RATE;
