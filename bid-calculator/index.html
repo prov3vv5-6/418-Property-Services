@@ -9,36 +9,56 @@
   <body>
     <main>
       <h1>418 Property Services Bid Calculator</h1>
-      <div class="field">
-        <label for="equipment">Equipment</label>
-        <select id="equipment">
-          <option value="17.7">
-            Truck + Utility Trailer (17.7 cubic yards)
-          </option>
-          <option value="15">Utility Trailer (15 cubic yards)</option>
-          <option value="2.7">Pickup Truck (2.7 cubic yards)</option>
-          <!-- <option value="5">Small Trailer</option> -->
-
-          <!-- <option value="15">Box Truck</option> -->
-        </select>
-      </div>
-      <div class="field">
-        <label for="fullness">How Full?</label>
-        <select id="fullness">
-          <option value="1">Completely Full (1)</option>
-          <option value="0.75">Three-Quarters Full (0.75)</option>
-          <option value="0.5">Half Full(0.5)</option>
-          <option value="0.25">Quarter Full (0.25)</option>
-        </select>
-      </div>
-      <div class="field">
+      <div class="load">
+        <!--Load 1-->
+        <label
+          >Equipment 1
+          <select class="loadEquipment">
+            <option value="15">Utility Trailer (15 cubic yards)</option>
+            <option value="2.7">Pickup Truck (2.7 cubic yards)</option>
+          </select>
+        </label>
+        <label
+          >How Full?
+          <select class="loadFullness">
+            <option value="1">Completely Full (1)</option>
+            <option value="0.75">Three-Quarters Full (0.75)</option>
+            <option value="0.5">Half Full(0.5)</option>
+            <option value="0.25">Quarter Full (0.25)</option>
+          </select>
+        </label>
         <!--TODO add numberOfLoadsInputErrorMsg-->
-        <label for="numberOfLoads">Number of Loads</label>
-        <input id="numberOfLoads" type="number" min="1" value="1" step="1" />
+        <label
+          >Number of Loads
+          <input class="loadCount" type="number" min="0" value="0" step="1" />
+        </label>
+      </div>
+      <!--Load 2-->
+      <div class="load">
+        <label
+          >Equipment 2
+          <select class="loadEquipment">
+            <option value="2.7">Pickup Truck (2.7 cubic yards)</option>
+            <option value="15">Utility Trailer (15 cubic yards)</option>
+          </select>
+        </label>
+        <label
+          >How Full?
+          <select class="loadFullness">
+            <option value="1">Completely Full (1)</option>
+            <option value="0.75">Three-Quarters Full (0.75)</option>
+            <option value="0.5">Half Full(0.5)</option>
+            <option value="0.25">Quarter Full (0.25)</option>
+          </select>
+        </label>
+        <!--TODO add numberOfLoadsInputErrorMsg-->
+        <label
+          >Number of Loads
+          <input class="loadCount" type="number" min="0" value="0" step="1" />
+        </label>
       </div>
       <div class="field">
         <label for="dumpWeight">Heavy Debris (tons)</label>
-
         <input id="dumpWeight" type="number" min="0" value="0" />
       </div>
       <div class="field">
