@@ -51,3 +51,22 @@ main {
   margin-left: 5px;
   color: red;
 }
+.load {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  box-shadow: 2px 2px 5px gray;
+}
+.load select,
+.load input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}
+.load label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
