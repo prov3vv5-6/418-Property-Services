@@ -27,12 +27,24 @@
             <option value="0.25">Quarter Full (0.25)</option>
           </select>
         </label>
+
+        <label>
+          Material Type
+          <select class="materialType">
+            <option value="10">Yard Debris</option>
+            <option value="17.5">Household Junk</option>
+            <option value="17.5">Furniture</option>
+            <option value="25">Construction Debris</option>
+            <option value="40">Heavy Debris (concrete/brick/dirt)</option>
+          </select>
+        </label>
         <!--TODO add numberOfLoadsInputErrorMsg-->
         <label
           >Number of Loads
           <input class="loadCount" type="number" min="0" value="0" step="1" />
         </label>
       </div>
+
       <!--Load 2-->
       <div class="load">
         <label
@@ -51,6 +63,16 @@
             <option value="0.25">Quarter Full (0.25)</option>
           </select>
         </label>
+        <label>
+          Material Type
+          <select class="materialType">
+            <option value="10">Yard Debris</option>
+            <option value="17.5">Household Junk</option>
+            <option value="17.5">Furniture</option>
+            <option value="25">Construction Debris</option>
+            <option value="40">Heavy Debris (concrete/brick/dirt)</option>
+          </select>
+        </label>
         <!--TODO add numberOfLoadsInputErrorMsg-->
         <label
           >Number of Loads
@@ -65,7 +87,7 @@
         </select>
       </div> -->
       <div class="field">
-        <label for="dumpWeight">Heavy Debris (tons)</label>
+        <label for="dumpWeight">Weight (tons)</label>
         <input id="dumpWeight" type="number" min="0" value="0" />
       </div>
       <div class="field">

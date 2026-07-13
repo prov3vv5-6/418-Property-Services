@@ -29,13 +29,25 @@ function calculateBid() {
   const travelMiles = parseFloat(travelMilesEl.value) || 0;
 
   let totalVolume = 0;
+  // let dumpWeight = 0;
+
   loadRows.forEach((row) => {
     const capacity = parseFloat(row.querySelector(".loadEquipment").value);
     const fullness = parseFloat(row.querySelector(".loadFullness").value);
     const count = parseFloat(row.querySelector(".loadCount").value) || 0;
-    totalVolume += capacity * fullness * count;
+    const materialCost = parseFloat(row.querySelector(".materialType").value);
+    // const materialType = row.querySelector(".materialType").textContent;
+    // if (materialCost === 10) {
+    //   dumpWeight = 175;
+    // } else if (materialCost == 17.5) {
+    //   dumpWeight = 300;
+    // } else {
+    //   console.log("error");
+    // }
+
+    totalVolume += capacity * fullness * count * materialCost;
   });
-  const basePrice = totalVolume * PRICE_PER_YARD;
+  const basePrice = totalVolume;
 
   // Input Validation
   if (!Number.isInteger(laborWorkers)) {
@@ -43,6 +55,11 @@ function calculateBid() {
       "Please enter a whole number of workers";
     return;
   }
+
+  // let yardDebriDumpWeight = 175
+  // let HouseholdJunkDumpWeight = 300
+
+  function suggestedDumpWeight() {}
 
   // Calculate dump fee
   const dumpFee = dumpWeight * DUMP_RATE;
