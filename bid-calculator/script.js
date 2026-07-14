@@ -13,7 +13,7 @@ const PRICE_PER_YARD = 15; // $ per cubic yard
 const DUMP_RATE = 48.5; // $ per ton of heavy debris. Twin Falls Transfer Station
 const LABOR_RATE = 40; // $ per worker per hour
 const FREE_MILES = 20; // free travel radius
-const PER_MILE = 1.5; // $ per mile beyond the free radius
+const PER_MILE = 0.8; // $ per mile beyond the free radius
 const MIN_CHARGE = 80; // minimum bid
 
 calcBtn.addEventListener("click", calculateBid);
