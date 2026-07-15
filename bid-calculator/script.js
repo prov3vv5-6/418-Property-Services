@@ -9,7 +9,6 @@ const workersInputErrorMsgEl = document.getElementById("workersInputErrorMsg");
 const loadRows = document.querySelectorAll(".load");
 
 // RATES
-const PRICE_PER_YARD = 15; // $ per cubic yard
 const DUMP_RATE = 48.5; // $ per ton of heavy debris. Twin Falls Transfer Station
 const LABOR_RATE = 40; // $ per worker per hour
 const FREE_MILES = 20; // free travel radius
@@ -28,26 +27,17 @@ function calculateBid() {
   const laborHours = parseFloat(laborHoursEl.value) || 0;
   const travelMiles = parseFloat(travelMilesEl.value) || 0;
 
-  let totalVolume = 0;
-  // let dumpWeight = 0;
+  let basePrice = 0;
 
   loadRows.forEach((row) => {
     const capacity = parseFloat(row.querySelector(".loadEquipment").value);
     const fullness = parseFloat(row.querySelector(".loadFullness").value);
     const count = parseFloat(row.querySelector(".loadCount").value) || 0;
     const materialCost = parseFloat(row.querySelector(".materialType").value);
-    // const materialType = row.querySelector(".materialType").textContent;
-    // if (materialCost === 10) {
-    //   dumpWeight = 175;
-    // } else if (materialCost == 17.5) {
-    //   dumpWeight = 300;
-    // } else {
-    //   console.log("error");
-    // }
 
-    totalVolume += capacity * fullness * count * materialCost;
+    const rowVolume = capacity * fullness * count;
+    basePrice += rowVolume * materialCost;
   });
-  const basePrice = totalVolume;
 
   // Input Validation
   if (!Number.isInteger(laborWorkers)) {
@@ -55,11 +45,6 @@ function calculateBid() {
       "Please enter a whole number of workers";
     return;
   }
-
-  // let yardDebriDumpWeight = 175
-  // let HouseholdJunkDumpWeight = 300
-
-  function suggestedDumpWeight() {}
 
   // Calculate dump fee
   const dumpFee = dumpWeight * DUMP_RATE;
