@@ -107,6 +107,13 @@
         <input id="travelMiles" type="number" min="0" value="0" />
       </div>
       <button id="calcBtn" type="button">Calculate Bid</button>
+      <div class="breakdown">
+        <p id="minChargeApplied"></p>
+        <p>Base Price (volume * material)<span id="baseAmount">$0</span></p>
+        <p>Dump fee<span id="dumpAmount">$0</span></p>
+        <p>Labor<span id="laborAmount">$0</span></p>
+        <p>Travel<span id="travelAmount">$0</span></p>
+      </div>
       <p class="result-line">Suggested Bid: <span id="result">$0</span></p>
     </main>
     <script src="script.js"></script>

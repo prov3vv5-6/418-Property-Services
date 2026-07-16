@@ -5,6 +5,12 @@ const laborHoursEl = document.getElementById("laborHours");
 const travelMilesEl = document.getElementById("travelMiles");
 const resultEl = document.getElementById("result");
 const workersInputErrorMsgEl = document.getElementById("workersInputErrorMsg");
+const baseAmountEl = document.getElementById("baseAmount");
+const dumpAmountEl = document.getElementById("dumpAmount");
+const laborAmountEl = document.getElementById("laborAmount");
+const travelAmountEl = document.getElementById("travelAmount");
+const minChargeAppliedEl = document.getElementById("minChargeApplied");
+
 // Returns a list of all elements matching that CSS selector
 const loadRows = document.querySelectorAll(".load");
 
@@ -63,7 +69,20 @@ function calculateBid() {
   // Check to make sure minimum charge is selected if subtotal is lower than MIN_CHARGE, then store in total
   const total = Math.max(subtotal, MIN_CHARGE);
 
-  // Display the total
+  // Displays the pricing breakdown section
+  baseAmountEl.textContent = `$${basePrice.toFixed(2)}`;
+  dumpAmountEl.textContent = `$${dumpFee.toFixed(2)}`;
+  laborAmountEl.textContent = `$${laborCost.toFixed(2)}`;
+  travelAmountEl.textContent = `$${travelCost.toFixed(2)}`;
+
+  // Display a minimum charge applied message if the total is greater than the subtotal. Reset and hide message when subtotal is greater than total
+  if (total > subtotal) {
+    minChargeAppliedEl.textContent = `Minimum charge applied`;
+  } else {
+    minChargeAppliedEl.textContent = "";
+  }
+
+  // Displays the suggested bid
   console.log(`Suggested Bid: $${total.toFixed(2)}`);
   resultEl.textContent = `$${total.toFixed(2)}`;
 }
