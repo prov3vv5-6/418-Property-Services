@@ -11,6 +11,7 @@ const laborAmountEl = document.getElementById("laborAmount");
 const travelAmountEl = document.getElementById("travelAmount");
 const minChargeAppliedEl = document.getElementById("minChargeApplied");
 
+const summaryEl = document.querySelector(".summary");
 // Returns a list of all elements matching that CSS selector
 const loadRows = document.querySelectorAll(".load");
 
@@ -68,6 +69,9 @@ function calculateBid() {
 
   // Check to make sure minimum charge is selected if subtotal is lower than MIN_CHARGE, then store in total
   const total = Math.max(subtotal, MIN_CHARGE);
+
+  // Reveals the Pricing Summary after the calculate bid button is clicked
+  summaryEl.classList.remove("hidden");
 
   // Displays the pricing breakdown section
   baseAmountEl.textContent = `$${basePrice.toFixed(2)}`;
