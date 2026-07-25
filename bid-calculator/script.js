@@ -22,7 +22,7 @@ const FREE_MILES = 20; // free travel radius
 const PER_MILE = 0.8; // $ per mile beyond the free radius
 const MIN_CHARGE = 80; // minimum bid
 
-// Array of objects
+// Array of objects (use to save locally)
 const persistFields = [
   { el: dumpWeightEl, key: "dumpWeight" },
   { el: laborWorkersEl, key: "laborWorkers" },
@@ -30,6 +30,20 @@ const persistFields = [
   { el: travelMilesEl, key: "travelMiles" },
 ];
 
+// loops through each load row and adds each field object to the persistFields Array
+loadRows.forEach((row, index) => {
+  const equipmentEl = row.querySelector(".loadEquipment");
+  const fullnessEl = row.querySelector(".loadFullness");
+  const loadCountEl = row.querySelector(".loadCount");
+  const materialTypeEl = row.querySelector(".materialType");
+
+  persistFields.push({ el: equipmentEl, key: `load${index}-equipment` });
+  persistFields.push({ el: fullnessEl, key: `load${index}-fullness` });
+  persistFields.push({ el: loadCountEl, key: `load${index}-loadCount` });
+  persistFields.push({ el: materialTypeEl, key: `load${index}-materialType` });
+});
+
+// SAVE TO LOCAL STORAGE LOGIC
 // loop through each field save it and load it
 persistFields.forEach((field) => {
   //LOAD: restore saved value on startup
