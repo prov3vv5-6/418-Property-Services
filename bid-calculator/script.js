@@ -22,6 +22,15 @@ const FREE_MILES = 20; // free travel radius
 const PER_MILE = 0.8; // $ per mile beyond the free radius
 const MIN_CHARGE = 80; // minimum bid
 
+// Materials Object
+const MATERIALS = {
+  yardDebris: { price: 10, density: 0.0315 },
+  householdJunk: { price: 15, density: 0.04 },
+  furniture: { price: 17.5, density: 0.075 },
+  constructionDebris: { price: 25, density: 0.125 },
+  heavyDebris: { price: 40, density: 0.2 },
+};
+
 // Array of objects (use to save locally)
 const persistFields = [
   { el: dumpWeightEl, key: "dumpWeight" },
@@ -71,15 +80,18 @@ function calculateBid() {
   const travelMiles = parseFloat(travelMilesEl.value) || 0;
 
   let basePrice = 0;
+  let totalWeight = 0;
 
   loadRows.forEach((row) => {
     const capacity = parseFloat(row.querySelector(".loadEquipment").value);
     const fullness = parseFloat(row.querySelector(".loadFullness").value);
     const count = parseFloat(row.querySelector(".loadCount").value) || 0;
-    const materialCost = parseFloat(row.querySelector(".materialType").value);
+    const materialKey = row.querySelector(".materialType").value;
+    const material = MATERIALS[materialKey];
 
     const rowVolume = capacity * fullness * count;
-    basePrice += rowVolume * materialCost;
+    basePrice += rowVolume * material.price;
+    totalWeight += rowVolume * material.density;
   });
 
   // Input Validation
@@ -90,7 +102,8 @@ function calculateBid() {
   }
 
   // Calculate dump fee
-  const dumpFee = dumpWeight * DUMP_RATE;
+  const weight = dumpWeight > 0 ? dumpWeight : totalWeight;
+  const dumpFee = weight * DUMP_RATE;
 
   // Calculate labor cost
   const laborCost = laborWorkers * laborHours * LABOR_RATE;
