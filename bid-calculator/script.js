@@ -22,6 +22,28 @@ const FREE_MILES = 20; // free travel radius
 const PER_MILE = 0.8; // $ per mile beyond the free radius
 const MIN_CHARGE = 80; // minimum bid
 
+// Array of objects
+const persistFields = [
+  { el: dumpWeightEl, key: "dumpWeight" },
+  { el: laborWorkersEl, key: "laborWorkers" },
+  { el: laborHoursEl, key: "laborHours" },
+  { el: travelMilesEl, key: "travelMiles" },
+];
+
+// loop through each field save it and load it
+persistFields.forEach((field) => {
+  //LOAD: restore saved value on startup
+  const saved = localStorage.getItem(field.key);
+  if (saved !== null) {
+    field.el.value = saved;
+  }
+
+  // SAVE: on every change, write current value
+  field.el.addEventListener("input", () => {
+    localStorage.setItem(field.key, field.el.value);
+  });
+});
+
 calcBtn.addEventListener("click", calculateBid);
 
 // Calculate Bid Function
