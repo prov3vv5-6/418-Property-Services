@@ -122,6 +122,8 @@ function calculateBid() {
   // Reveals the Pricing Summary after the calculate bid button is clicked
   summaryEl.classList.remove("hidden");
 
+  summaryEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
   // Displays the pricing breakdown section
   baseAmountEl.textContent = `$${basePrice.toFixed(2)}`;
   dumpAmountEl.textContent = `$${dumpFee.toFixed(2)}`;
