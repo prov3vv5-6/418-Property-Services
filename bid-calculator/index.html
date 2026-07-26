@@ -84,13 +84,8 @@
           <input class="loadCount" type="number" min="0" value="0" step="1" />
         </label>
       </div>
-      <!-- <div class="jobType">
-        <label>Type of Job</label>
-        <select>
-          <option value="15">Yard Debris</option>
-          <option value="25"></option>
-        </select>
-      </div> -->
+      <button type="button" id="flatFeeToggle">Add-on items</button>
+      <div id="flatFeeCard" class="hidden"></div>
       <div class="field">
         <label for="dumpWeight">Override weight (tons, optional)</label>
         <input id="dumpWeight" type="number" min="0" value="0" />
@@ -114,6 +109,7 @@
         <div class="breakdown">
           <p id="minChargeApplied"></p>
           <p>Base Price (volume * material)<span id="baseAmount">$0</span></p>
+          <p>Add-on items<span id="flatFeeAmount">$0</span></p>
           <p>Dump fee<span id="dumpAmount">$0</span></p>
           <p>Labor<span id="laborAmount">$0</span></p>
           <p>Travel<span id="travelAmount">$0</span></p>
