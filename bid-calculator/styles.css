@@ -33,6 +33,7 @@ select {
   color: var(--text-light);
   border: 1px solid var(--brand-cyan);
   border-radius: 4px;
+  font-size: 16px;
 }
 .field {
   margin-bottom: 1rem;
