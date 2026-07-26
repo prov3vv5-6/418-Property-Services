@@ -15,17 +15,17 @@
         <label
           >Equipment 1
           <select class="loadEquipment">
-            <option value="13.48">Utility Trailer (13.48 cubic yards)</option>
-            <option value="2.7">Pickup Truck (2.7 cubic yards)</option>
+            <option value="13.48">Utility Trailer</option>
+            <option value="2.7">Pickup Truck</option>
           </select>
         </label>
         <label
           >How Full?
           <select class="loadFullness">
-            <option value="1">Completely Full (1)</option>
-            <option value="0.75">Three-Quarters Full (0.75)</option>
-            <option value="0.5">Half Full(0.5)</option>
-            <option value="0.25">Quarter Full (0.25)</option>
+            <option value="1">Completely Full</option>
+            <option value="0.75">Three-Quarters Full</option>
+            <option value="0.5">Half Full</option>
+            <option value="0.25">Quarter Full</option>
           </select>
         </label>
 
@@ -53,17 +53,17 @@
         <label
           >Equipment 2
           <select class="loadEquipment">
-            <option value="2.7">Pickup Truck (2.7 cubic yards)</option>
-            <option value="13.48">Utility Trailer (13.48 cubic yards)</option>
+            <option value="2.7">Pickup Truck</option>
+            <option value="13.48">Utility Trailer</option>
           </select>
         </label>
         <label
           >How Full?
           <select class="loadFullness">
-            <option value="1">Completely Full (1)</option>
-            <option value="0.75">Three-Quarters Full (0.75)</option>
-            <option value="0.5">Half Full(0.5)</option>
-            <option value="0.25">Quarter Full (0.25)</option>
+            <option value="1">Completely Full</option>
+            <option value="0.75">Three-Quarters Full</option>
+            <option value="0.5">Half Full</option>
+            <option value="0.25">Quarter Full</option>
           </select>
         </label>
         <label>
@@ -105,10 +105,12 @@
         <input id="travelMiles" type="number" min="0" value="0" />
       </div>
       <button id="calcBtn" type="button">Calculate Bid</button>
+      <button id="resetBtn" type="button">Reset</button>
       <div class="summary hidden">
         <div class="breakdown">
           <p id="minChargeApplied"></p>
-          <p>Base Price (volume * material)<span id="baseAmount">$0</span></p>
+          <!-- base price = volume * material -->
+          <p>Base Price<span id="baseAmount">$0</span></p>
           <p>Add-on items<span id="flatFeeAmount">$0</span></p>
           <p>Dump fee<span id="dumpAmount">$0</span></p>
           <p>Labor<span id="laborAmount">$0</span></p>

@@ -91,7 +91,7 @@ large trailer 10 yd^3, box truck 15 yd^3.
 7. [ ] Stretch (optional): localStorage for default rates; itemized breakdown;
        **multi-load support:** interim "number of loads" multiplier field — **done**
        (Approach A: multiplies base volume; travel/dump stay manual by decision).
-       - [ ] **Mixed loads via load rows — Style 1 (fixed rows)** ← NEXT (building now).
+       - [x] **Mixed loads via load rows — Style 1 (fixed rows)** — done.
          Lets each load have its OWN equipment + fullness + count, so a real "truck full +
          trailer half" job prices honestly (single fullness currently forces both to match).
          Approach: put a few (~3) fixed `.load` rows in the HTML, each = equipment select +
@@ -118,22 +118,51 @@ large trailer 10 yd^3, box truck 15 yd^3.
 
 ## Current progress checkpoint
 
-- **HTML: done** — heading + full form (equipment/fullness selects, 4 number inputs, all
-  with matched labels), Calculate button, `<span id="result">` display.
-- **CSS: done** — mobile-first stylesheet: `*` border-box reset, body defaults, centered
-  `main` (max-width 500px), stacked/spaced `.field`s, full-width thumb-friendly inputs,
-  green `#calcBtn` CTA, prominent `#result`.
-- **JS: done** — `calculateBid()` (extracted function, wired via
-  `addEventListener("click", calculateBid)`): reads 6 inputs with `parseFloat`, number
-  inputs guarded with `|| 0`; computes volume → base → dump/labor/travel (travel clamped
-  with `Math.max(0, …)`); enforces `MIN_CHARGE` via `Math.max`; formats with
-  `.toFixed(2)`; writes to page with `textContent`. Rate constants are placeholders — get
-  real numbers from the friend.
-- Pricing model: **decided** (volume/cubic-yards hybrid with placeholders — see above).
+The v1 calculator is well past the original MVP. Built since the last checkpoint (all
+typed by the user in "explain, then type it" mode; all verified in-browser):
+
+- **Multi-load rows (Style 1): done** — two fixed `.load` rows, each = equipment +
+  fullness + material + count. `calculateBid` loops `querySelectorAll(".load")` and sums
+  each row's `capacity × fullness × count × material.price` into `basePrice`.
+- **Material weights: done** — `MATERIALS` lookup holds `{ price ($/yd³), density
+  (tons/yd³) }` per material; option `value`s are keys. Dump weight is auto-computed
+  (`volume × density`, summed into `totalWeight`); the old weight input is now an
+  **optional manual override** (`dumpWeight > 0 ? dumpWeight : totalWeight`). Densities
+  came from the friend's lbs/yd³ figures ÷ 2000.
+- **Flat-fee add-on items: done** — `FLATFEEITEMS` lookup (`{ flatFeePrice, flatFeeWeight,
+  label }` per item, e.g. fridge/mattress/tire/hot tub). JS **generates** a labeled qty
+  input per item (`Object.keys` + `createElement`/`appendChild`, `dataset.key` for lookup)
+  into a toggle-able card (`#flatFeeToggle` outlined secondary button + `classList.toggle`
+  on `#flatFeeCard`). Math: `qty × flatFeePrice` → its own breakdown line; `qty ×
+  flatFeeWeight` → `totalWeight` (so it feeds the dump fee automatically).
+- **localStorage persistence: done** — a `persistFields` array + a save/load loop restore
+  EVERY field on page load (the 4 number inputs, all load-row fields, and the generated
+  flat-fee inputs — each pushed into `persistFields` as it's built, before the loop runs).
+- **Itemized breakdown + UX: done** — receipt-style `.breakdown` card (base, add-ons,
+  dump, labor, travel, min-charge notice, Suggested Bid), hidden until Calculate, then
+  `scrollIntoView({behavior:"smooth"})` scrolls to it.
+- **Brand restyle: done** — dark navy→blue gradient, brand cyan `#38b6ff` accents with
+  glow, navy cards w/ cyan borders, dark input fields, cyan CTA; palette lives in CSS
+  variables (`:root`). Primary (solid) vs secondary (outlined) button hierarchy.
+- Rates in code (still placeholders, confirm w/ friend): `DUMP_RATE` 48.5, `LABOR_RATE`
+  40, `FREE_MILES` 20, `PER_MILE` 0.8, `MIN_CHARGE` 80. Equipment: utility trailer 13.48
+  yd³, pickup 2.7 yd³.
 - Deployed: live via GitHub Pages at `/418-Property-Services/bid-calculator/`.
-- **Next step (step 7, optional stretch):** pick one — recompute live on input `change`
-  (reuse `calculateBid`), itemized breakdown, `localStorage` for editable rates, or
-  multi-load support. Otherwise the v1 calculator is complete.
+
+### Next up (user-requested, in order)
+1. [ ] **Reset button** — clears the form back to defaults. Decide: also clear the saved
+   `localStorage` values, or just reset the on-screen inputs? (Likely both — reset inputs
+   *and* wipe the stored keys so a reload stays clean.)
+2. [ ] **Avoid mobile zoom when typing a flat-fee qty** — iOS Safari auto-zooms when you
+   focus an input whose `font-size` is < 16px. The `#flatFeeCard input` rule only sets
+   `width`, so those little qty boxes likely inherit a sub-16px UA font and trigger the
+   zoom. Fix: give inputs `font-size: 16px` (1rem). Verify on a real phone.
+
+### Still open (business, not code)
+- Get the friend's **real** rates, material densities, and flat-fee prices/weights.
+- **Double-count check:** if a flat-fee item's price already covers its disposal, also
+  adding its weight to the weight-based dump fee may overcharge — confirm intent.
+- Not yet built from step 7: **SMS "Text this bid" hand-off** (see checklist item above).
 
 ## Teaching note (how this was built)
 

@@ -13,6 +13,7 @@ const minChargeAppliedEl = document.getElementById("minChargeApplied");
 const flatFeeCardEl = document.getElementById("flatFeeCard");
 const flatFeeToggleEl = document.getElementById("flatFeeToggle");
 const flatFeeAmountEl = document.getElementById("flatFeeAmount");
+const resetBtn = document.getElementById("resetBtn");
 const summaryEl = document.querySelector(".summary");
 // Returns a list of all elements matching that CSS selector
 const loadRows = document.querySelectorAll(".load");
@@ -136,6 +137,11 @@ calcBtn.addEventListener("click", calculateBid);
 // flatFeeCardEl.classList.toggle("hidden") key line to either toggle between showing the card or hiding the card when the button is pressed.
 flatFeeToggleEl.addEventListener("click", () => {
   flatFeeCardEl.classList.toggle("hidden");
+});
+
+resetBtn.addEventListener("click", () => {
+  persistFields.forEach((field) => localStorage.removeItem(field.key));
+  location.reload();
 });
 
 // Calculate Bid Function
